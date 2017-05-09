@@ -1,0 +1,74 @@
+<h1>Vision</h1>
+<div class="form-group">
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#camara">Camara</a></li>
+    <li><a data-toggle="tab" href="#upload">Upload</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="camara" class="tab-pane fade in active">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xs-12 col-md-11">
+            <video id="video" width="560" height="420" autoplay></video>
+            <canvas id="canvas" width="560" height="420"></canvas>
+          </div>
+          <div class="col-xs-12 col-md-1">
+            <button id="snap" class="sexyButton">Snap</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div id="result">
+              <div>
+                <label>FACE DETECTION</label>
+                <div class="face_detection"></div>
+              </div>
+              <div>
+                <label>LABEL DETECTION</label>
+                <div class="label_detection"></div>
+              </div>
+              <div>
+                <label>WEB DETECTION</label>
+                <div class="web_detection_entities"></div>
+                <div class="web_detection_pages"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="upload" class="tab-pane fade">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xs-12 col-md-11">
+            <input type="file" id="imageLoader" name="imageLoader" accept="image/*" multiple="false" class="form-control"/>
+            <canvas id="canvas2" width="560" height="420"></canvas>
+          </div>
+          <div class="col-xs-12 col-md-1">
+            <button id="submit-btn" class="sexyButton">Submit</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div id="result2">
+              <div>
+                <label>FACE DETECTION</label>
+                <div class="face_detection"></div>
+              </div>
+              <div>
+                <label>LABEL DETECTION</label>
+                <div class="label_detection"></div>
+              </div>
+              <div>
+                <label>WEB DETECTION</label>
+                <div class="web_detection_entities"></div>
+                <div class="web_detection_pages"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

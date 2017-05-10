@@ -206,6 +206,18 @@ function drawImageWithDetectedArea(canvas, results) {
   })
 }
 
+function drawImageScaled(img, ctx) {
+   var canvas = ctx.canvas;
+   var hRatio = canvas.width  / img.width;
+   var vRatio =  canvas.height / img.height;
+   var ratio  = Math.min ( hRatio, vRatio );
+   var centerShift_x = ( canvas.width - img.width*ratio ) / 2;
+   var centerShift_y = ( canvas.height - img.height*ratio ) / 2;
+   ctx.clearRect(0,0,canvas.width, canvas.height);
+   ctx.drawImage(img, 0,0, img.width, img.height,
+                 centerShift_x,centerShift_y,img.width*ratio, img.height*ratio);
+}
+
 $(document).ajaxStart(function () {
   $.blockUI({ message: '請稍後' });
 }).ajaxStop($.unblockUI);
@@ -277,19 +289,33 @@ window.addEventListener("DOMContentLoaded", function() {
     reader.onload = function(event){
         var img = new Image();
         img.onload = function(){
-            canvas.width = img.width;
-            canvas.height = img.height;
-            context.drawImage(img, 0, 0);
 
-            canvas2.width = img.width;
-            canvas2.height = img.height;
-            context2.drawImage(img, 0, 0);
+          var hRatio = canvas.width / img.width;
+          var vRatio = canvas.height / img.height;
+          var ratio  = Math.min ( hRatio, vRatio );
 
-            canvas3.width = img.width;
-            canvas3.height = img.height;
-            context3.drawImage(img, 0, 0);
+          context.fillStyle = "#2b343d";
+          context.fillRect(0, 0, canvas.width, canvas.height);
+          //canvas.width = width;
+          //canvas.height = height;
+          //context.drawImage(img, 0, 0);
+          drawImageScaled(img, context);
 
-            $('#submit-btn').click();
+          context2.fillStyle = "#2b343d";
+          context2.fillRect(0, 0, canvas2.width, canvas2.height);
+          //canvas2.width = width;
+          //canvas2.height = height;
+          //context2.drawImage(img, 0, 0);
+          drawImageScaled(img, context2);
+
+          context3.fillStyle = "#2b343d";
+          context3.fillRect(0, 0, canvas3.width, canvas3.height);
+          //canvas3.width = width;
+          //canvas3.height = height;
+          //context3.drawImage(img, 0, 0);
+          drawImageScaled(img, context3);
+
+          $('#submit-btn').click();
         }
         img.src = event.target.result;
     }
@@ -336,8 +362,14 @@ window.addEventListener("DOMContentLoaded", function() {
 
   // Trigger photo take
   document.getElementById('snap').addEventListener('click', function() {
+    context.fillStyle = "#2b343d";
+    context.fillRect(0, 0, canvas.width, canvas.height);
     context.drawImage(video, 0, 0, 560, 420);
+    context2.fillStyle = "#2b343d";
+    context2.fillRect(0, 0, canvas2.width, canvas2.height);
     context2.drawImage(video, 0, 0, 560, 420);
+    context3.fillStyle = "#2b343d";
+    context3.fillRect(0, 0, canvas3.width, canvas3.height);
     context3.drawImage(video, 0, 0, 560, 420);
     var data_uri = {
       "data_uri": canvas.toDataURL("image/png")

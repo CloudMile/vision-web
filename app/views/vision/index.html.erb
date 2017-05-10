@@ -1,74 +1,117 @@
-<h1>Vision</h1>
-<div class="form-group">
-  <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#camara">Camara</a></li>
-    <li><a data-toggle="tab" href="#upload">Upload</a></li>
-  </ul>
 
-  <div class="tab-content">
-    <div id="camara" class="tab-pane fade in active">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-xs-12 col-md-11">
-            <video id="video" width="560" height="420" autoplay></video>
-            <canvas id="canvas" width="560" height="420"></canvas>
-          </div>
-          <div class="col-xs-12 col-md-1">
-            <button id="snap" class="sexyButton">Snap</button>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-12">
-            <div id="result">
-              <div>
-                <label>FACE DETECTION</label>
-                <div class="face_detection"></div>
-              </div>
-              <div>
-                <label>LABEL DETECTION</label>
-                <div class="label_detection"></div>
-              </div>
-              <div>
-                <label>WEB DETECTION</label>
-                <div class="web_detection_entities"></div>
-                <div class="web_detection_pages"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="upload" class="tab-pane fade">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-xs-12 col-md-11">
-            <input type="file" id="imageLoader" name="imageLoader" accept="image/*" multiple="false" class="form-control"/>
-            <canvas id="canvas2" width="560" height="420"></canvas>
-          </div>
-          <div class="col-xs-12 col-md-1">
-            <button id="submit-btn" class="sexyButton">Submit</button>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-12">
-            <div id="result2">
-              <div>
-                <label>FACE DETECTION</label>
-                <div class="face_detection"></div>
-              </div>
-              <div>
-                <label>LABEL DETECTION</label>
-                <div class="label_detection"></div>
-              </div>
-              <div>
-                <label>WEB DETECTION</label>
-                <div class="web_detection_entities"></div>
-                <div class="web_detection_pages"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div id="page-wrapper">
+  <!-- Header -->
+	<header id="header" class="alt">
+		<h1><a href="https://www.mile.cloud/home">CloudMile</a></h1>
+		<nav id="nav">
+			<ul>
+				<li class="special">
+					<span>Vision API Demo<br></span>
+				</li>
+			</ul>
+		</nav>
+	</header>
+  <!-- Banner -->
+	<section id="banner">
+		<div class="inner">
+      <video id="video" autoplay></video>
+			<h2>InstaMood</h2>
+			<p>
+				在亞洲區唯一以Google Cloud Platform 為核心經營的合作夥伴<br/>
+					<a href="http://www.mile.cloud">CloudMile</a>.
+			</p>
+			<ul class="actions">
+				<li><button id="snap" class="button special">Snap</button></li>
+        <li><button id="upload" class="button special">Upload</button></li>
+			</ul>
+      <input type="file" id="imageLoader" name="imageLoader" accept="image/*" multiple="false"/>
+      <button id="submit-btn" class="sexyButton">Submit</button>
+		</div>
+		<a href="#one" class="more scrolly">Learn More</a>
+	</section>
+
+  <!-- One -->
+	<section id="one" class="wrapper style1 special">
+		<div class="inner">
+			<header class="major">
+				<h2>
+					<a href="https://cloud.google.com/vision/" >CLOUD VISION API</a><br />
+					透過強大的API協助洞察圖像中的重要資訊
+				</h2>
+				<p>
+					點擊上方的 Snap 按鈕立即拍攝圖像或是 Upload 按鈕上傳圖片，即可體驗以下圖片分析功能。<br>
+          1. 臉部辨識（Face）：分析圖片中所有臉部的表情及特偵，並給出可能的情緒指標<br>
+          2. 圖像敘述(Label)：偵測出圖片中的物件及環境，給出能夠形容此圖的文字內容，包括形容詞、名詞等<br>
+          3. 關鍵字搜尋（Web）：辨識出相關的資訊條目，給出關鍵字；此功能可以協助使用者尋找類似內容之圖片</p>
+			</header>
+		</div>
+	</section>
+
+  <!-- Two -->
+	<section id="two" class="wrapper alt style2">
+		<section class="spotlight">
+			<div class="image">
+        <canvas id="canvas" width="560" height="420"></canvas>
+			</div>
+			<div class="content">
+				<h2>
+					臉部辨識<br />
+					喜悅｜悲傷｜憤怒｜驚訝｜曝光｜模糊｜帽子
+				</h2>
+        <div id="face_result"></div>
+			</div>
+		</section>
+		<section class="spotlight">
+			<div class="image">
+        <canvas id="canvas2" width="560" height="420"></canvas>
+			</div>
+			<div class="content">
+				<h2>
+					圖像敘述<br />
+					偵測出圖像中的物件或形容詞來描述圖像內容
+				</h2>
+        <div id="label_result"></div>
+			</div>
+		</section>
+		<section class="spotlight">
+			<div class="image">
+        <canvas id="canvas3" width="560" height="420"></canvas>
+			</div>
+			<div class="content">
+				<h2>
+					關鍵字搜尋<br />
+					以圖搜尋，尋找相對應的關鍵字資訊
+				</h2>
+        <div id="web_result" class="content"></div>
+			</div>
+		</section>
+	</section>
+
+  <!-- CTA -->
+	<section id="cta" class="wrapper style4">
+		<div class="inner">
+			<header>
+				<h2>聯絡我們</h2>
+				<p>www.mile.cloud<br>台北市信義區基隆路一段396號二樓之一<br>02-87893939</p>
+			</header>
+			<ul class="actions vertical">
+				<li><a href="mailto:service@mile.cloud" class="button fit special">聯絡我們</a></li>
+				<li><a href="https://www.mile.cloud/home" class="button fit">更多資訊</a></li>
+			</ul>
+		</div>
+	</section>
+
+  <!-- Footer -->
+	<footer id="footer">
+		<ul class="icons">
+			<li><a href="https://www.facebook.com/CloudMileFans/" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+			<li><a href="https://www.linkedin.com/company/cloudmile" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
+			<li><a href="https://www.mile.cloud/home" class="icon fa-dribbble"><span class="label">Website</span></a></li>
+			<li><a href="mailto:service@mile.cloud" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+		</ul>
+		<ul class="copyright">
+			<li>&copy; CloudMile</li><li>API: <a href="http://https://cloud.google.com/vision/">Cloud Viaion API</a></li>
+		</ul>
+	</footer>
+
 </div>

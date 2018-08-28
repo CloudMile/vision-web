@@ -261,7 +261,7 @@ window.addEventListener("DOMContentLoaded", function() {
   // Put video listeners into place
   if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       navigator.mediaDevices.getUserMedia(mediaConfig).then(function(stream) {
-          video.src = window.URL.createObjectURL(stream);
+          video.srcObject = stream;
           video.play();
       });
   }
@@ -279,7 +279,7 @@ window.addEventListener("DOMContentLoaded", function() {
     }, errBack);
   } else if(navigator.mozGetUserMedia) { // Mozilla-prefixed
     navigator.mozGetUserMedia(mediaConfig, function(stream){
-      video.src = window.URL.createObjectURL(stream);
+      video.srcObject = stream;
       video.play();
     }, errBack);
   }

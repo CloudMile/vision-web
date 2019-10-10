@@ -25,7 +25,23 @@ Setup working project.
 $ gcloud config set core/project <YOUR_PROJECT_ID>
 ```
 
-Replace `<YOUR_PROJECT_ID>` to the project id which enabled the vision API.
+In local machine, you need credentials to call API
+
+You can setup with gcloud command
+
+```shell
+$ gcloud auth application-default
+```
+
+Or [create a servcie account](https://cloud.google.com/iam/docs/creating-managing-service-accounts#creating) and [download the credentials](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#creating_service_account_keys)
+
+We don't need grant the service account any permission, and keep the credentials out of your git repository.
+
+Before run the server, we export a environment variable for the credentials.
+
+```shell
+$ export GOOGLE_APPLICATION_CREDENTIALS=/path/to/credentials.json
+```
 
 Clone this project
 
@@ -38,35 +54,6 @@ Install dependency gems
 
 ```shell
 $ bundle install
-```
-
-Edit the project ID in `app/controllers/vision_controller.rb`
-
-```ruby
-require "google/cloud/vision"
-
-class VisionController < ApplicationController
-  PROJECT_ID = "cloudmile-vision"
-
-  def index
-
-  end
-
-  def detect
-    #convert imageBase64Data to image
-    data = params[:data_uri]
-    image_data = Base64.decode64(data['data:image/png;base64,'.length .. -1])
-    File.open("#{Rails.root}/public/uploads/temp.png", 'wb') do |f|
-      f.write image_data
-    end
-
-    vision = Google::Cloud::Vision.new project: PROJECT_ID
-    image  = vision.image "#{Rails.root}/public/uploads/temp.png"
-    #face = image.face
-    annotation = vision.annotate image, labels: true, faces: true, web: true
-    render json: { responses: annotation }
-  end
-end
 ```
 
 Replace `PROJECT_ID = "cloudmile-vision"` to your project.

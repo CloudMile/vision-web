@@ -7,16 +7,14 @@ var STRATEGIES = {
     result_type: 1,
     resultAttrName: 'face_annotations',
     outputAttrNames: ['joy_likelihood', 'sorrow_likelihood', 'anger_likelihood', 'surprise_likelihood', 'under_exposed_likelihood', 'blurred_likelihood', 'headwear_likelihood','bounding_poly', 'detection_confidence'],
-    mapAttrNAmes : {'detection_confidence':'信心指數', 'joy_likelihood':'喜悅', 'sorrow_likelihood':'悲傷',
-                    'anger_likelihood': '憤怒', 'surprise_likelihood': '驚訝', 'under_exposed_likelihood':'曝光', 'blurred_likelihood':'模糊',
-                    'headwear_likelihood':'頭飾', 'detection_confidence':'信心指數'},
+    mapAttrNAmes : {'joy_likelihood':'喜悅', 'sorrow_likelihood':'悲傷', 'anger_likelihood': '憤怒', 'surprise_likelihood': '驚訝', 'under_exposed_likelihood':'曝光', 'blurred_likelihood':'模糊', 'headwear_likelihood':'頭飾', 'detection_confidence':'信心指數'},
     drawImage: true
   },
   label_detection: {
     result_id: 'label_result',
     result_type: 2,
     resultAttrName: 'label_annotations',
-    outputAttrNames: ['mid', 'locale', 'description', 'score', 'condidence', 'topicality'],
+    outputAttrNames: ['mid', 'locale', 'description', 'score', 'confidence', 'topicality'],
     drawImage: false
   },
   web_detection_entities: {
@@ -27,15 +25,6 @@ var STRATEGIES = {
     outputAttrNames: ['entity_id', 'score', 'description'],
     drawImage: false
   }
-  /*
-  ,
-  web_detection_pages: {
-    resultAttrName: 'web_detection',
-    subResultAttrName: 'partial_matching_images',
-    outputAttrNames: ['url', 'score'],
-    drawImage: false
-  }
-  */
 };
 var escapeHtml = (function (String) {
   var escapeMap = {
@@ -62,40 +51,6 @@ var escapeHtml = (function (String) {
     });
   };
 }(String));
-
-/*
-function showResult(results, attrNames, div_path) {
-  var content = "<table class=\"table table-striped\">";
-
-  content += '<thead><tr><th>#</th>';
-  attrNames.forEach(function(name) {
-    content += '<th>' + escapeHtml(name) + '</th>'
-  });
-  content += '</tr></thead>';
-
-  if (!results) {
-    content += '</table>';
-    $(div_path).append(content);
-    return;
-  }
-
-  content += '<tbody>';
-  results.forEach(function(elem, i) {
-    content += '<tr><td>' + (i + 1) + '</td>';
-    attrNames.forEach(function(name) {
-      var attrVal = elem[name];
-      if ((typeof attrVal) === 'object') {
-        content += '<td>' + escapeHtml(JSON.stringify(attrVal)) + '</td>'
-      } else {
-        content += '<td>' + escapeHtml(attrVal) + '</td>'
-      }
-    });
-    content += '</tr>';
-  });
-  content += '</tbody></table>';
-  $(div_path).append(content);
-}
-*/
 
 function showResult(results, vision_type)  {
   var attrNames = vision_type.outputAttrNames;
@@ -341,7 +296,10 @@ window.addEventListener("DOMContentLoaded", function() {
            }
            for(var k in STRATEGIES) {
               var vision_type = STRATEGIES[k];
-              results = apiResponse[vision_type.resultAttrName];
+              var results = apiResponse[vision_type.resultAttrName];
+              if (typeof results === 'undefined') {
+                continue;
+              }
               if (!$.isArray(results)) {
                 results = results[vision_type.subResultAttrName];
               }
@@ -388,7 +346,10 @@ window.addEventListener("DOMContentLoaded", function() {
            }
            for(var k in STRATEGIES) {
               var vision_type = STRATEGIES[k];
-              results = apiResponse[vision_type.resultAttrName];
+              var results = apiResponse[vision_type.resultAttrName];
+              if (typeof results === 'undefined') {
+                continue;
+              }
               if (!$.isArray(results)) {
                 results = results[vision_type.subResultAttrName];
               }

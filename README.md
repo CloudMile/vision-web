@@ -4,8 +4,8 @@ This is a demo project for [Google Vision API](https://cloud.google.com/vision/)
 
 # Runtime
 
-* Ruby 2.4.1
-* Rails 5.0.2
+* Ruby 2.6.5
+* Rails 5.0.7.2
 
 # Setup Google Vision API
 

@@ -1,8 +1,6 @@
 require "google/cloud/vision"
 
 class VisionController < ApplicationController
-  PROJECT_ID = "cloudmile-vision"
-
   def index
 
   end
@@ -11,14 +9,16 @@ class VisionController < ApplicationController
     #convert imageBase64Data to image
     data = params[:data_uri]
     image_data = Base64.decode64(data['data:image/png;base64,'.length .. -1])
-    File.open("#{Rails.root}/public/uploads/temp.png", 'wb') do |f|
-      f.write image_data
-    end
+    image = { content: image_data }
 
-    vision = Google::Cloud::Vision.new project: PROJECT_ID
-    image  = vision.image "#{Rails.root}/public/uploads/temp.png"
-    #face = image.face
-    annotation = vision.annotate image, labels: true, faces: true, web: true
-    render json: { responses: annotation }
+    features = [{ type: :FACE_DETECTION }, { type: :LABEL_DETECTION }, { type: :WEB_DETECTION }]
+    
+    requests_element = { image: image, features: features }
+    requests = [requests_element]
+
+    image_annotator = Google::Cloud::Vision::ImageAnnotator.new
+    response = image_annotator.batch_annotate_images(requests)
+
+    @result = response.responses[0]
   end
 end

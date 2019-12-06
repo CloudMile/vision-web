@@ -184,7 +184,7 @@ window.addEventListener("DOMContentLoaded", function() {
   var context = canvas.getContext('2d');
 
   var background = new Image();
-  background.src = '<%= asset_path("Face.png") %>';
+  background.src = 'assets/Face.png';
   // Make sure the image is loaded first otherwise nothing will draw.
   background.onload = function() {
     context.drawImage(background, 0, 0, 560, 420);
@@ -193,7 +193,7 @@ window.addEventListener("DOMContentLoaded", function() {
   var canvas2 = document.getElementById('canvas2');
   var context2 = canvas2.getContext('2d');
   var background2 = new Image();
-  background2.src = '<%= asset_path("Label.png") %>';
+  background2.src = 'assets/Label.png';
   background2.onload = function() {
     context2.drawImage(background2, 0, 0, 560, 420);
   }
@@ -201,7 +201,7 @@ window.addEventListener("DOMContentLoaded", function() {
   var canvas3 = document.getElementById('canvas3');
   var context3 = canvas3.getContext('2d');
   var background3 = new Image();
-  background3.src = '<%= asset_path("Web.png") %>';
+  background3.src = 'assets/Web.png';
   background3.onload = function() {
     context3.drawImage(background3, 0, 0, 560, 420);
   }

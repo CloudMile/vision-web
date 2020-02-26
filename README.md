@@ -17,23 +17,7 @@ Enable the vision API in `APIs & Services` page.
 
 # Setup Development
 
-Install [Cloud SDK](https://cloud.google.com/sdk/downloads) and login.
-
-Setup working project.
-
-```shell
-$ gcloud config set core/project <YOUR_PROJECT_ID>
-```
-
-In local machine, you need credentials to call API
-
-You can setup with gcloud command
-
-```shell
-$ gcloud auth application-default
-```
-
-Or [create a servcie account](https://cloud.google.com/iam/docs/creating-managing-service-accounts#creating) and [download the credentials](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#creating_service_account_keys)
+Using [create a servcie account](https://cloud.google.com/iam/docs/creating-managing-service-accounts#creating) and [download the credentials](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#creating_service_account_keys)
 
 We don't need grant the service account any permission, and keep the credentials out of your git repository.
 

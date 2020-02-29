@@ -30,10 +30,10 @@ In local machine, you need credentials to call API
 You can setup with gcloud command
 
 ```shell
-$ gcloud auth application-default
+$ gcloud auth application-default login
 ```
 
-Or [create a servcie account](https://cloud.google.com/iam/docs/creating-managing-service-accounts#creating) and [download the credentials](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#creating_service_account_keys)
+Then [create a servcie account](https://cloud.google.com/iam/docs/creating-managing-service-accounts#creating) and [download the credentials](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#creating_service_account_keys)
 
 We don't need grant the service account any permission, and keep the credentials out of your git repository.
 
